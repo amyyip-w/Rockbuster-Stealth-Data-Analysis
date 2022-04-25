@@ -5,7 +5,7 @@ This repository contain SQL queries used to acquire a good understanding of the 
 ## Folders Upload Description
 
 
-## Data Sets
+## Data Set
 Following data set was fabricated and used in the analysis for learning purposes:
 * Rockbuster
 
