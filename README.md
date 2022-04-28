@@ -6,7 +6,6 @@ This repository contain SQL queries used to acquire a good understanding of the 
 
 
 ## Data Set
-Following data set was fabricated and used in the analysis for learning purposes:
 * Rockbuster
 
 **Citation:** “The Instacart Online Grocery Shopping Dataset 2017”, Accessed from https://www.instacart.com/datasets/grocery-shopping-2017.
