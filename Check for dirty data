@@ -1,4 +1,4 @@
-# Check for dirty data
+# Check for Dirty Data
 
 ## Check for duplicate data:
 SELECT title, description, release_year, language_id, rental_duration, COUNT(*)
