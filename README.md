@@ -5,7 +5,7 @@ This repository contain SQL queries used to acquire a good understanding of the 
 ## Files Upload Description
 * Creation of ERD and data dictionary.
 * Check and clean dirty data before conducting analysis.
-* Various types of SQL queries applied to extract data such as use of joins, subqueries, and CTEs to answer business questions.
+* Various types of SQL queries applied to extract data such as use of joins, subqueries, CTEs, and CASE statements to answer business questions.
 
 
 ## Data Set
