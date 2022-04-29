@@ -8,6 +8,8 @@ This repository contain SQL queries used to acquire a good understanding of the 
 ## Data Set
 * Rockbuster
 
+Rockbuster relational database contains data including films, inventory, stores, customers, and payments.
+
 ## Language
 **PostgreSQL:** 14.1
 
