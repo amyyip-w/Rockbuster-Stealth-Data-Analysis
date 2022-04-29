@@ -5,8 +5,8 @@ This repository contain SQL queries used to acquire a good understanding of the 
 ## Files Upload Description
 * An entity relationship diagram (ERD) was created to illustrate the relationships between the tables in Rockbuster's relational database.
 * A data dictionary was created to catalogue the database's metadata.
-* Check and clean dirty data before conducting analysis.
-* Various types of SQL queries applied to extract data such as use of joins, subqueries, CTEs, and CASE statements to answer business questions.
+* Data check and cleaning procedures before conducting analysis.
+* Various types of SQL queries applied such as use of joins, subqueries, CTEs, and CASE statements to answer business questions.
 
 
 ## Data Set
