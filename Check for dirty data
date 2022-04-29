@@ -1,22 +1,27 @@
 # Check for Dirty Data
 
-## Check for duplicate data:
+
+## Film Table
+
+-- Check for duplicate data:
 SELECT title, description, release_year, language_id, rental_duration, COUNT(*)
 FROM film
 GROUP BY title, description, release_year, language_id, rental_duration
 HAVING COUNT(*) > 1;
 
-## Check for non-uniform data:
+
+-- Check for non-uniform data:
 SELECT DISTINCT rating
 FROM film
 ORDER BY rating;
 
-## Inconsistency in rating table was found. Clean data to replace the non-uniform data to keep values consistent:
+-- Inconsistency in rating table was found. Clean data to replace the non-uniform data to keep values consistent:
 UPDATE film
 SET rating = 'G'
 WHERE rating IN ('gen', 'g', 'General');
 
-## Check for missing values:
+
+-- Check for missing values:
 SELECT *
 FROM film
 WHERE film_id IS NULL
@@ -31,3 +36,59 @@ WHERE film_id IS NULL
 	OR last_update IS NULL
 	OR special_features IS NULL
 	OR fulltext IS NULL;
+
+
+
+
+## Customer Table
+
+-- Check for duplicate data:
+SELECT first_name, last_name, COUNT(*)
+FROM customer
+GROUP BY first_name, last_name
+HAVING COUNT (*) > 1;
+
+SELECT email, COUNT(*)
+FROM customer
+GROUP BY email
+HAVING COUNT(*) > 1;
+
+SELECT address_id, COUNT(*)
+FROM customer
+GROUP BY address_id
+HAVING COUNT(*) > 1;
+
+
+-- Check for non-uniform data data:
+SELECT DISTINCT store_id
+FROM customer;
+
+SELECT DISTINCT first_name, last_name
+FROM customer;
+
+SELECT DISTINCT email
+FROM customer;
+
+SELECT DISTINCT address_id
+FROM customer;
+
+SELECT DISTINCT last_update
+FROM customer;
+
+SELECT DISTINCT active
+FROM customer;
+
+
+-- Check for missing values:
+SELECT *
+FROM customer
+WHERE customer_id IS NULL
+	OR store_id IS NULL
+	OR first_name IS NULL
+	OR last_name IS NULL
+	OR email IS NULL
+	OR address_id IS NULL
+	OR activebool IS NULL
+	OR create_date IS NULL
+	OR last_update IS NULL
+	OR active IS NULL
