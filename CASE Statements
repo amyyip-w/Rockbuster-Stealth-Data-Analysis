@@ -1,0 +1,28 @@
+# CASE Statements
+
+-- Create new column to display the language name (English, Korean) instead of its IDs:
+SELECT 	film_id,
+        title,
+        rental_rate,
+		CASE
+			WHEN language_id = 1 THEN 'English'
+			WHEN language_id = 2 THEN 'Korean'
+			ELSE 'Unknown'
+		END AS movie_language
+FROM film;
+
+
+--Finding which Rockbuster movies are suitable for children based on their ratings:
+
+SELECT	film_id,
+        title,
+        rating,
+		CASE
+			WHEN rating = 'G' THEN 'Kids Allowed'
+			WHEN rating = 'PG' THEN 'Kids Allowed'
+			WHEN rating = 'NC-17' THEN 'Kids Not Allowed'
+			WHEN rating = 'R' THEN 'Kids Not Allowed'
+			ELSE 'Parental Guidance Recommended'
+		END AS kids_allowed
+FROM film
+ORDER BY rating;
