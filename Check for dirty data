@@ -15,7 +15,7 @@ SELECT DISTINCT rating
 FROM film
 ORDER BY rating;
 
--- Inconsistency in rating table was found. Clean data to replace the non-uniform data to keep values consistent:
+-- Inconsistency in rating column was found. Clean data to replace the non-uniform data to keep values consistent:
 UPDATE film
 SET rating = 'G'
 WHERE rating IN ('gen', 'g', 'General');
