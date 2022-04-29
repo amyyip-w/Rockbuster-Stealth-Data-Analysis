@@ -3,7 +3,8 @@ Rockbuster Stealth LLC is a movie rental company that is planning to launch an o
 This repository contain SQL queries used to acquire a good understanding of the data from inventory, customer insight, and payment departments to develop launch strategy for their new service.
 
 ## Files Upload Description
-* Creation of ERD and data dictionary.
+* An entity relationship diagram (ERD) was created to illustrate the relationships between the tables in the relational database for Rockbuster.
+* A data dictionary was created to catalogue the Rockbuster database's metadata.
 * Check and clean dirty data before conducting analysis.
 * Various types of SQL queries applied to extract data such as use of joins, subqueries, CTEs, and CASE statements to answer business questions.
 
