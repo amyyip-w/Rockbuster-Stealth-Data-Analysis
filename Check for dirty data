@@ -1,0 +1,33 @@
+# Check for dirty data
+
+## Check for duplicate data:
+SELECT title, description, release_year, language_id, rental_duration, COUNT(*)
+FROM film
+GROUP BY title, description, release_year, language_id, rental_duration
+HAVING COUNT(*) > 1;
+
+## Check for non-uniform data:
+SELECT DISTINCT rating
+FROM film
+ORDER BY rating;
+
+## Inconsistency in rating table was found. Clean data to replace the non-uniform data to keep values consistent:
+UPDATE film
+SET rating = 'G'
+WHERE rating IN ('gen', 'g', 'General');
+
+## Check for missing values:
+SELECT *
+FROM film
+WHERE film_id IS NULL
+	OR description IS NULL
+	OR release_year IS NULL
+	OR language_id IS NULL
+	OR rental_duration IS NULL
+	OR rental_rate IS NULL
+	OR length IS NULL
+	OR replacement_cost IS NULL
+	OR rating IS NULL
+	OR last_update IS NULL
+	OR special_features IS NULL
+	OR fulltext IS NULL;
