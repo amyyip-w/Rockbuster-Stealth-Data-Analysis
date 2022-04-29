@@ -1,0 +1,88 @@
+# Performing Subqueries
+
+-- Finding the maximum amount paid for any movie in the Rockbuster database:
+
+SELECT title,
+       rating,
+       release_year,
+
+    (SELECT MAX(amount)
+     FROM payment) AS max_amount
+FROM film;
+
+
+-- Finding movies whose rental rate is lower than the average payment made:
+
+SELECT title,
+       rating,
+       release_year,
+       rental_rate
+FROM film
+WHERE rental_rate <
+    (SELECT AVG(amount)
+     FROM payment);
+     
+
+-- Finding how many films are rated G, PG, or PG-13, and how many films are less than 100-minutes long:
+
+SELECT COUNT (shortmovies.film_ID) AS short_movie_count,
+             shortmovies.rating
+FROM
+    (SELECT film.film_ID,
+            film.rating
+     FROM film
+     WHERE film.length <=100) AS shortmovies
+GROUP BY shortmovies.rating;
+
+
+-- Returning a list of customer IDs (which are multiple values) where the return date is earlier than July 29, 2005:
+
+SELECT *
+FROM customer
+WHERE customer_id IN
+    (SELECT customer_id
+     FROM rental
+     WHERE return_date < '2005-07-29');
+
+
+-- Finding the average amount paid by the top 5 customers:
+
+SELECT AVG(amount) AS Average_Amount_Paid
+FROM payment p
+INNER JOIN
+        (SELECT a.customer_id, a.first_name, a.last_name, c.country, b.city, SUM(amount) AS Total_Amount_Paid
+        FROM customer a
+        INNER JOIN address add ON a.address_id = add.address_id
+        INNER JOIN city b ON add.city_id = b.city_id
+        INNER JOIN country c ON b.country_id = c.country_id
+        INNER JOIN payment p ON a.customer_id = p.customer_id
+        WHERE b.city IN ('Aurora', 'Atlixco', 'Xintai', 'Adoni', 'Dhule (Dhulia)', 'KUrashiki', 'Pingxiang', 'Sivas', 'Celaya', 'So Leopoido')
+        GROUP BY a.customer_id, a.first_name, a.last_name, c.country, b.city
+        ORDER BY Total_Amount_Paid DESC
+        LIMIT 5) AS Total_Amount_Paid ON p.customer_id = Total_Amount_Paid.customer_id
+ ORDER BY Average_Amount_Paid DESC;
+  
+
+-- Finding how many of the top 5 customers are based within each country:
+
+SELECT c.country, COUNT(DISTINCT a.customer_id) AS All_Customer_Count, COUNT(DISTINCT Top_5_Customers.customer_id) AS Top_Customer_Count
+FROM customer a
+INNER JOIN address add ON a.address_id = add.address_id
+INNER JOIN city b ON add.city_id = b.city_id
+INNER JOIN country c ON b.country_id = c.country_id
+LEFT JOIN
+		(SELECT a.customer_id, a.first_name, a.last_name, c.country, b.city, SUM(amount) AS Total_Amount_Paid
+		FROM customer a
+		INNER JOIN address add ON a.address_id = add.address_id
+		INNER JOIN city b ON add.city_id = b.city_id
+		INNER JOIN country c ON b.country_id = c.country_id
+		INNER JOIN payment p ON a.customer_id = p.customer_id
+		WHERE b.city IN ('Aurora', 'Atlixco', 'Xintai', 'Adoni', 'Dhule (Dhulia)', 'Kurashiki', 'Pingxiang', 'Sivas', 'Celaya', 'So Leopoido')
+		GROUP BY a.customer_id, a.first_name, a.last_name, c.country, b.city
+		ORDER BY Total_Amount_Paid DESC
+		LIMIT 5) AS Top_5_Customers ON c.country = Top_5_Customers.country
+GROUP BY c.country
+ORDER BY All_Customer_Count DESC
+LIMIT 5;
+
+
