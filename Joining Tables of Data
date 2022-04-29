@@ -1,5 +1,19 @@
 # Joining Tables of Data
 
+-- Finding the current geographical distribution of customers and the revenue generated in each country:
+
+SELECT country,
+       COUNT(A.customer_id) AS customer_count,
+       SUM(amount) AS total_payment
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_ID = D.country_ID
+INNER JOIN payment E ON a.customer_id = E.customer_id
+GROUP BY country
+ORDER BY total_payment DESC;
+
+
 -- Finding the top 10 countries for Rockbuster in terms of customer numbers:
 
 SELECT c.country, COUNT(customer_id) AS Customer_Counts
@@ -9,7 +23,7 @@ INNER JOIN city b ON add.city_id = b.city_id
 INNER JOIN country c ON b.country_id = c.country_id
 GROUP BY c.country
 ORDER BY Customer_Counts desc
-LIMIT 10
+LIMIT 10;
 
 
 -- Finding the top 10 cities within the top 10 countries:
@@ -22,7 +36,7 @@ INNER JOIN country c ON b.country_id = c.country_id
 WHERE c.country IN('India', 'China', 'United States', 'Japan', 'Mexico', 'Brazil', 'Russian Federation', 'Philippines', 'Turkey', 'Indonesia')
 GROUP BY b.city, c.country
 ORDER BY Customer_Counts desc
-LIMIT 10
+LIMIT 10;
 
 
 -- Finding the top 5 customers in the top 10 cities who have paid the highest total amounts to Rockbuster:
@@ -36,4 +50,4 @@ INNER JOIN payment p ON a.customer_id = p.customer_id
 WHERE b.city IN ('Aurora', 'Atlixco', 'Xintai', 'Adoni', 'Dhule (Dhulia)', 'Kurashiki', 'Pingxiang', 'Sivas', 'Celaya', 'So Leopoldo')
 GROUP BY a.customer_id, a.first_name, a.last_name, c.country, b.city
 ORDER BY Total_Amount_Paid DESC
-LIMIT 5
+LIMIT 5;
